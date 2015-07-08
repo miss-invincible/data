@@ -1,0 +1,309 @@
+1)array is always an object.,it is not a primitive data type.but it may hold primitive or reference variables.
+
+2)Triangle tS = ta[2J; 
+  ts[2J.area = 343; 
+  Int y = x:
+  x = 27;
+q
+two things to be observed here:
+1)x=3;
+  y=x;
+  x=4;
+here y=3 and x=4 clearly here no connection with refences of the variables.
+ 2)Triangle tS = ta[2J; 
+  ts[2J.area = 343; 
+t5 and ts[2] referes to the same memmory location.
+
+
+3)in java its yor wish to assign the value returned by a function or not to assign n just call the function.
+
+4)to parse a string into an integer:
+Integer.pasreInt("enterYourString");
+this works only if the strings represents digits.
+
+5) for loops:
+-->enhanced for loop:
+for (Int cell:cellLoactions){}
+means put each integer value in cellLocations int cell one by one.
+-->old for loop
+for(i=0;i>10;i++){}
+
+6) it has same increment operators and break statemts.
+
+7) we can directly assign arrays.
+int[] a={3,4,5};
+int[] b;
+b=a;
+
+
+8)random number generator:
+int num=(int)Math.random()*5);
+this would give num btw 0 to 4 (4 included)
+
+int before maths is the explicit type casting of double into integers as this functions gives numbers between 0 to 4.99999 which when converted into int remains 0 to 4.
+
+9) ++x means first increase the value and then use the result.x++ means first use the value and then increase it.
+
+10)it does type casting just like c;
+	int b ;
+	short c=(short)b;
+if b is more than the value that c can hold i.e. more than the limit of short int then it converts it into 2's compliment.
+
+11)Array list:
+	add(obj element)
+	remove(int index)
+	contains(obj elemnt)
+	isEmpty()
+	indexOf(Obj element)
+	size()
+	get(Int index)
+
+import Java.util.ArrayList
+
+public/private etc ArrayList<string(etc)> mylist = new ArrayList<string>();
+
+
+one thing worth noting is: data type we pss inside should be an object and not a primitive one..eg String or class abc..etc...to pass a primitive datatype..use wrapper classes.
+
+String t = new String();
+add(t);
+remove(0);
+
+
+12)to convert int into string:	
+	String s = new String();
+	int i=2;
+	s=Integer.toString(i);
+
+13)short circuit(&&,||) and non-short circuit operators(&,|)
+short circuit operators:
+when JVM tries to check only one neccesary condition :
+if condtion on rhs of && is false then it will not check the value of rhs and retrun a false .
+if condtion on lhs is true then it will not check the value on rhs of || and return a true.
+
+not short circuit operators : & |
+they always check both the values.
+
+use:
+Why is this great? Let's say thatyouhave areference variable and you're notsure whether it's been assigned to anobject. Ifyoutry to call amethod using thisnull reference variable (l.e ,noobjecthas been assigned), you'll getaNullPointerException. So, try this:
+
+if (refVar 1= null && refVar.isvalidType() ) 
+{ II do 'got a valid type' stuff
+}
+
+14)to find the length of an array:
+	int[] a = new int[3];
+	int b;
+	b=a.length;	//here length is a variable n not a method.
+
+15)inheritance:
+-----> the access modifiers available in java are: private,default,protected,public:
+	1) private type are not inheritable;
+-----> there are three ways in which we can restict our class from further inheritence(being subclassed):
+		1)access control:
+		by not making a class public:
+		(we cant make a class private)then that class can only be inherited in that package only to which it belongs.
+		2)using the keyword final:
+		final tell that it is the end of inheritence line.nobody can now extend it further.
+		3)make the constructor of the class as "private".
+
+16)polymorphism:
+----->	Dog myDog = new Dog();
+	this statements does three things:
+	
+	1)create a reference variable:
+	Dog myDog;
+	2)create new object :
+		new Dog()
+	3)assign the object to the refrence variable:
+	Dog myDog = new Dog();
+	
+	now ploymorphism is:
+	if we have a superclass Animal to the subclass dog then the reference variable of Animal can hold the reference of its subclasses.
+	
+	Animal myDog = new Dog();
+	
+------> same thing can be done when we pass the reference variable of a superclass type dto any function
+	
+	public fun(Animal a)
+	{	a.makenoise();
+	}
+	
+	now all the subclasses like dog,bear,wolf etc the objects of all the animals can be passed as argument to this function.
+
+17)final keyword(refer to point 15)
+------> to make it more secure.(when we want that nobody should extend it).
+	many classes in java api are final eg String.to make them secure.
+------>if we want to protect a method from overriding then declare it as final.
+	
+######private keywords make a method protected from inheritance while final makes a keyword protected from overriding.
+
+18)overriding:
+
+------->we can override the methods we inherited from superclass.
+	it has 3 rules:
+	1)the overriden method should take the same type of argument.
+	2)should return an argument of compatible type.
+	3)access specifiers should be same.(or friendlier).
+	because when we do polymorphism and pass a subclass instead of superclass in a function which takes superclass object as the argument then the compiler will 	just accept the function that the subclass will give in place of superclass as compiler only care if the super class has the function for which we are looking 	at,the refrence we gave(of subclass)(read page 211).but the actual problem comes at run time when jvm compiles it.n due to overriding if subclass takes 	different parameters or give differet return types then a run time error is created.
+	eg:
+	
+	Animal class has method public void fun();
+	Dog ovverrides method as public int fun(int);
+	public void fun2(Animal a)
+	{	fun(); 
+	}
+	a run time error would come if we pass an object of Dog.(not the compile type.).
+
+THIS WAS THE POLYMORPHYSM.
+
+19) overloading:
+------->an overloaded method is a different method with the same name.it has NOTHING to do with POLYMORPHYISM AND INHERITENCE.
+------->method overloading and method overriding are two different things.
+------->we can not alone change the return type of a method while overloading it.(as jvm would see it as overriding.).we need to change both-arguments list as well as 		return type to do so.
+------->we can alone change the argument list without changing the return type.
+------->we can change the access levels in any direction.(private public etc kuch bhi kar do).
+
+
+##############hum override tab use karte hain jab hum chahte hain ki subclass me us method ka latest version hi ho jab bhi call kara jaaye method ko subclass k ya subclass specific implemetaion ho(it says the same thing as before).but overloading me latest jaisa kuch ni hota..depending upon the argument list and access level or return type we use various versions of an overloaded method.
+	
+20)abstract and concrete classes:
+	an abstract class cannot be instantiated.we cant make its objects.
+	eg:
+	abstract public class animal{}
+	abstract public class canine extends animal{}
+	
+	a concrete class can be instantiated.by default all the classes are concrete.
+------->we can make the reference variable of a concrete class and use it as it is the basis of polymorphyic arrays,polymorphic return types and polymorphic arguments 	etc.
+
+	an abstract class has no use untill it is inherited.
+
+21)abstract methods:
+-------->an abstract class may or may not have abstract method.
+-------->a concrete class cant have abstract class.
+-------->abstract methods means a method without body(used when we dont hv any generic defination for that function..like eats() in animal class.).
+-------->a concrete class MUST OVERRIDE all the abstract methods..(the first concrete class encountered in a heirachy.)
+-------->other abstract method in between may or may not implement the abstract 	methods.
+eg:
+	public abstract void eats();
+
+22)class object:
+------>it is a class that is implicitly extended by all the classes.
+------>object class is not abstract class.it is concrete.
+class Dog extends Canine{}
+class Canine extends Animal{}
+class Animal cextends Object{}
+
+this class provides imp four methods:
+boolean equals()
+class getclass()
+int hashcode()
+String toString()
+
+eg:
+Cat c = new Cat();
+Dog d = new Dog();
+boolean k;
+k = c.equals(d);
+
+pg 230.
+
+23)interfaces:
+----->100% abstract classes.(it means the class as well as all its mthods are also abstract).
+----->by default it is public and abstract.
+----->we can implement more than one interface.
+----->any class can implement interface.that class may or may not belog to the same inheritence tree.
+----->we use it when we want to provide same functionality to a group of classes.
+
+eg:
+
+public interface Pet{
+	public abstract void befriendly();
+	public abstract void sayHi();
+
+}	//no need to put public n abstract keywords.it has those properties by default.
+
+public class Dog implements Pet{}
+
+24)superclass keyword:
+----->this calls the methods of the superclass.
+----->referes to the address of the superclass from inside a subclass.
+
+super.report();//calls the method of superclass which is overriden in subclass.
+
+imp point----------------
+-----> a type caste can be used to assign a reference variable of one type to a subtype.but type casting would fail on run time if the refrence to the object is not 		compatible with the reference variable to which it is typecasted.
+----->we can extend only one class.this is done to avoid deadly diamond of death.
+----->we can implement multiple interfaces.
+	eg:
+	public class Dog extends animals implements Pets,Wild{}
+----->when we use :
+	ArrayList<Dog> mydog = new ArryList<dog>();
+	then we dont need a typecaste to assign the object returned by the methods of ArrayList class to Dog because compiler does the required typecaste for us in 	this case.
+	therfore it not wrong to say:
+	Dog dDog = mydog.getObject(cDog);
+
+25)constructors:
+------>the birth of an object takes place with a consructor.
+------> Dog myDog = new Dog();
+	--->here Dog() is not a method but it is a constructor.
+	--->it is always called before new keyword.
+------>a constructor can initialize,count and do wat all you want it to do.
+------>the order to be followed in constructor chaining is:
+	first the calling of subclass constructor takes places,BUT it is the constructor of superclass that is finished first.it follows stack.
+------>you can call the constructor on yor own or compiler will do it.but complier alwys calls the default or no arg constructor.
+	--->while calling , the frst line of constructor should be super();
+	eg:
+	public Dog()
+	{	super();
+	}
+	or 
+	public Dog()
+	{}
+	both are correct.
+------>to call the constructor of own class use the keyword "this(arg list)"
+------>this() can be used only inside a constructor.
+------>in one construct only one can exist:super() or this() but not both.
+------>we can pass the arguments too their respective constructors using these 	keywords
+
+26)local variables=stack variables=automatic variables=temporary variables=scope-challenged variables.
+
+27) keyword static:
+------>static variables are those which are shared by all the instances of that class. it is not refered by the instance names but by the name of the classes.
+	eg:
+	Dog.size=4;
+	say;
+	//if size if public static in Dog class.
+
+----->static methods:
+	static methods can be invoked without the intances of the class.
+	eg:
+	Math.random();
+	
+	-->it does not depend upon any particular instances of the class.
+	-->a static method cannot access any non-static variable or method as it does not know which instance to look for.
+----->if u have a class and u don't want to instantiate it then mark its constructor as private.(other method was making it abstrat but that does not 	provide us with the advange of using the functions with instances.).
+------>a static method can only access static vaiables and static methods.
+------>if u do not intialize static variables then they are by default intialized to 0;
+------>all the static variables are initialized before any instance of the class is created.
+
+28) static final keyword:
+------>to make anyvariable as constant then mark it static final.
+------>convewntion to make the variables as constant:keep them in uppercase.
+	eg:
+	static final double PI=3.14;
+------>always initialize the static final variables either at the time of declartion or in constructors.
+------>the method initialising any static final variable is run even before any static varial is used or any static method is caled.
+------>the code initializing static final variable is run as soon as the class is loaded.
+
+29)final keyword:
+------>final varible:constant.
+------>final method:cannot be overriden.
+------>final class:cannot be inherited.
+	(it is mainly done for the ecurity reasons.)
+------>if a class is marked as final then there is no need to make its methods final(prevention of overriding of methods is ensured as the class cant be overitten.).
+	but not the vice-versa when we selectively makrk the ethods as final.
+
+
+
+

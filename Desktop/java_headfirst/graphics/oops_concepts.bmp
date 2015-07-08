@@ -1,0 +1,1 @@
+1)When you define a supertype for a group of classes, any subclass of that subtype can be substituted where the supertype is expected.

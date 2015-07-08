@@ -1,0 +1,9 @@
+port numbers:
+
+telnet:23
+http:80
+ftp:20
+https:443
+pop3:110
+stmp:25
+time:37

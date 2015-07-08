@@ -1,0 +1,42 @@
+1)can we make an object(inside void main function) of the class in which void main function exists??
+
+2)what does this error mean??:
+class names:Class names,'Triangle', are only accepted if annotation processing is explicitily requested
+
+3) In the real world (which you should try to avoid),yes,you wl/l want to put your classesInto packages.y??
+
+4)check it out if we make changes to a superclass and then recompile that superclass only and not the subclass then would the changes be displayed on the subclass or not?? pg 203
+
+5)what is inner class??
+
+6)an abstract class can have static menbers iska kya matlab hai ??
+
+7) check if the methods of an interface are by default abstract and public or not??
+8)Ifyou have aclass with only static methods, and you do not want the class tobe instantiated, you can mark the constructor private.
+then how would the condtructor run??
+
+9)Afinal static variable must be assigned avalue either atthe time itisdeclared, orin astatic initializer. static { DOG_CODE:: 420; }
+
+try running it
+
+10)run the code of page 305.
+
+11)find out the reason for Wrappers exception
+
+12)not clear :
+	boolean b = new Boolean("true").booleanValue();
+//is booleanValue() extracting Boolean vlaue from the object of Boolean class that did the parsing of the string??(explicit unwrapping??)
+and (new Boolean("true")) shouldn't it be like this??
+
+13)wats BigDecimal ??
+(floating point number),BigInteger
+
+14)in calender api how do they know which field are we passing??
+like date etc??
+i did not get the concept of fields
+15)check pt 13 on page 331
+16)if some exception do occurs in try block then will the changes till then made by try block be kept or discarded??
+17)page 357 troble (at the end) wala point samjh ni aya.
+18)page 358 4th  under exception rule is not clear.
+
+19) dunnoe how to apply keyevents and its listener

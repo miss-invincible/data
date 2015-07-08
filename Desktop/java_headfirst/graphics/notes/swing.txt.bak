@@ -1,0 +1,469 @@
+			JAVA:SWING:
+
+1)JFrame:
+represent a window on the screen where we put other things like buttons etc.
+
+2)to look for widgets or swing components search in javax.swing.package
+eg: JButton,JRadioButton,JScrollPane,JSlider,JTextArea,JTextField,JTable etc.
+
+3)to control how the interface looks like use java's "look and feels" library.It controls how the interface looks like.
+these looks are platform dependent.
+
+4)the link between event source(button etc) and listner(we) is the listner interface.
+
+5)event classes can be found in java.awt.event package (all events will have event word common in them).
+
+6)evry event type has a matching listner interface.
+eg MouseEvents implements MouseListner interface.
+now since they are the interfaces then we need to call them like this
+eg: Dog implements Pet
+and then we have to write implemetation method for every interface method.
+
+7)in one single event class like Mouse Event there can be several different mouse events like mousePressed() , mouseReleased() , etc implemented from MouseListner interface  representing different mouse events.
+
+8)so interface is actually a way through which an event source can call us back.SO INTERFACE IS WHERE A CALL-BACK METHOD IS DECLARED.
+
+9)therefore as a listner we tell the button that we are interersted listener via listner interface and add ourselves to buttons interested listener list using:
+button.AddActionListner(this) method of the listener.
+and get ourselves registered.
+
+now whenever button pressing event occurs then button call the actionPerformed(the Evenet) methos of the listner.and since we have written the method of interface actionperformed so we get our workdone when it is called.
+in short folowing are the steps to get a button's action event:
+	1)implement actionListener interface.
+	2)register with the button(tell it u want to listen for its events)
+	3)define the event handling method.implement the actionPerformed() 	method from ActionListener interface.
+
+10)please read page 262 chapter 12 java headfrst.Its awesome and mind blowing.tells u how to create event sources of your own and about the use of event object sent by button (event source).
+____________________________________
+|add<EventType>Listener		    |
+|object.add<EventType>Listener(this)|
+|___________________________________|
+
+-----//making drawing widgets:-----
+
+11)the argument that we paas in painComponent(Graphics g)
+g is actually like this:
+Graphics g = new Graphics2D();
+so its an object of type Graphics2D but refenced to its superclass Graphics.
+ but when this hapens then we can only use the methods that are available in superclass and not those of subclass's personal methods not in superclass.
+but we can convert the referencing back to subclass by sort of typecasting.
+in this case :
+Graphics2D g2g=(Graphics2D) g;
+
+now we can use all the methods of Graphics2D also.
+
+
+12) some of the methods we can call on a graphics reference:
+	drawImage()
+	drawLine()
+	drawPolygon()
+	drawRect()
+	drawOval()
+	fillRect()
+	fillRoundRect()
+	setColor()
+
+13)methods we can call on Graphics2D refenrence:
+	fill3DRect()
+	draw3DRect()
+	rotate()
+	scale()
+	sheer()
+	transform()
+	setRenderingHints()
+check Api for more
+
+14)while applying pic only jpeg or gif is allowed
+
+15)there are five border layouts on a jframe.
+	CENTER (default)
+	SOUTH
+	EAST
+	NORTH
+	WEST
+these are constants.
+jframe1.getContentPane(BorderLayout.NORTH,button1);
+
+------------------------------------------------------------
+//adding the actionlistners of two buttons at a time in an unobject oriented way
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class FourWidgetsMain implements ActionListener
+{	JFrame jfm ;
+	JButton colorButton;
+	JButton label;
+	public static void main(String[] args)
+	{
+		FourWidgetsMain fwm = new FourWidgetsMain();
+		fwm.go();
+	}
+
+	public void go ()
+	{
+		jfm = new JFrame();
+		colorButton = new JButton("click me i change color");
+		JButton labelButton = new JButton("click me i change label");
+		label = new JButton("i m going to change :'(");
+		FourWidgets fw = new FourWidgets();
+
+		jfm.getContentPane().add(BorderLayout.SOUTH,colorButton);
+		jfm.getContentPane().add(BorderLayout.EAST,labelButton);
+		jfm.getContentPane().add(BorderLayout.CENTER,fw);
+		jfm.getContentPane().add(BorderLayout.WEST,label);
+
+		colorButton.addActionListener(this);
+		labelButton.addActionListener(this);
+
+		jfm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		jfm.setSize(500,500);
+		jfm.setVisible(true);
+ 
+
+	}
+
+	public void actionPerformed(ActionEvent event)
+	{
+		if(event.getSource() == colorButton)
+			jfm.repaint();
+		else
+			label.setText("i m a new one");
+	}
+
+}
+
+-----------------------------------------------------------
+//adding actionlisteners of two button in object oriented way but with no encapsulation
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+
+//but this breaks encapsulation
+
+public class FourWidgetsMain2
+{	
+
+	public JFrame jfm ;
+	public JButton colorButton;
+	public JButton label;
+	public JButton labelButton;
+	public static void main(String[] args)
+	{
+		FourWidgetsMain2 fwm = new FourWidgetsMain2();
+		fwm.go();
+	}
+
+	public void go ()
+	{
+		jfm = new JFrame();
+		colorButton = new JButton("click me i change color");
+		labelButton = new JButton("click me i change label");
+		label = new JButton("i m going to change :'(");
+		FourWidgets fw = new FourWidgets();
+
+		jfm.getContentPane().add(BorderLayout.SOUTH,colorButton);
+		jfm.getContentPane().add(BorderLayout.EAST,labelButton);
+		jfm.getContentPane().add(BorderLayout.CENTER,fw);
+		jfm.getContentPane().add(BorderLayout.WEST,label);
+
+		ColorButtonActionListener cbal = new ColorButtonActionListener(this);
+		LabelButtonActionListener lbal = new LabelButtonActionListener(this);
+		//colorButton.addActionListener(this);
+		//labelButton.addActionListener(this);
+
+		jfm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		jfm.setSize(500,500);
+		jfm.setVisible(true);
+ 
+
+	}
+	/*
+	public void actionPerformed(ActionEvent event)
+	{
+		if(event.getSource() == colorButton)
+			jfm.repaint();
+		else
+			label.setText("i m a new one");
+	}
+	*/
+
+}
+
+class ColorButtonActionListener implements ActionListener
+{	JFrame widgets;
+	JButton cbutton;
+	
+
+	public ColorButtonActionListener(FourWidgetsMain2 fwm2)
+	{	widgets=fwm2.jfm;
+		cbutton = fwm2.colorButton;
+		cbutton.addActionListener(this);
+	}
+
+	public void actionPerformed(ActionEvent event)
+	{	
+		widgets.repaint();
+
+	}
+	
+}
+
+class LabelButtonActionListener implements ActionListener
+{	JButton lbl;
+	JButton lbutton;
+	public LabelButtonActionListener(FourWidgetsMain2 fwm2)
+	{
+		lbl = fwm2.label;
+		lbutton=fwm2.labelButton;
+		lbutton.addActionListener(this);
+	}
+
+	public void actionPerformed(ActionEvent event)
+	{
+		lbl.setText("voilaa!!  its OO way");
+
+	}
+
+}
+------------------------------------------------------------------
+//adding two buttons at a time in object oriented way with encapsulation 
+
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+
+//but this breaks encapsulation
+
+public class FourWidgetsMain3
+{	
+
+	JFrame jfm ;
+	JButton colorButton;
+	JButton label;
+	JButton labelButton;
+	public static void main(String[] args)
+	{
+		FourWidgetsMain3 fwm = new FourWidgetsMain3();
+		fwm.go();
+	}
+
+	public void go ()
+	{
+		jfm = new JFrame();
+		colorButton = new JButton("click me i change color");
+		labelButton = new JButton("click me i change label");
+		label = new JButton("i m going to change :'(");
+		FourWidgets fw = new FourWidgets();
+
+		jfm.getContentPane().add(BorderLayout.SOUTH,colorButton);
+		jfm.getContentPane().add(BorderLayout.EAST,labelButton);
+		jfm.getContentPane().add(BorderLayout.CENTER,fw);
+		jfm.getContentPane().add(BorderLayout.WEST,label);
+
+		ColorButtonActionListener cbal = new ColorButtonActionListener(this);
+		LabelButtonActionListener lbal = new LabelButtonActionListener(this);
+		//colorButton.addActionListener(this);
+		//labelButton.addActionListener(this);
+
+		jfm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		jfm.setSize(500,500);
+		jfm.setVisible(true);
+ 
+
+	}
+	public JFrame getJFrame()
+	{
+		return jfm;
+	}
+	public JButton getLabel()
+	{
+		return label;
+	}
+	public JButton getColorButton()
+	{
+		return colorButton;
+	}
+	public JButton getLabelButton()
+	{
+		return labelButton;
+	}
+
+}
+
+class ColorButtonActionListener implements ActionListener
+{	JFrame widgets;
+	JButton cbutton;
+	
+
+	public ColorButtonActionListener(FourWidgetsMain3 fwm3)
+	{	widgets=fwm3.getJFrame();
+		cbutton=fwm3.getColorButton();
+		cbutton.addActionListener(this);
+	}
+
+	public void actionPerformed(ActionEvent event)
+	{	
+		widgets.repaint();
+
+	}
+}
+
+class LabelButtonActionListener implements ActionListener
+{	JButton lbl;
+	JButton lbutton;
+	JFrame widgets;
+	int count;
+	public LabelButtonActionListener(FourWidgetsMain3 fwm3)
+	{
+		lbutton = fwm3.getLabelButton();
+		widgets = fwm3.getJFrame();
+		lbl = fwm3.getLabel();
+		lbutton.addActionListener(this);
+		int count=0;
+	}
+
+	public void actionPerformed(ActionEvent event)
+	{	if(count%2==0)
+		lbl.setText("voilaa!!ts OO way");
+		else
+		lbl.setText("u pressed again!!");
+
+		count++;
+
+	}
+
+}
+------------------------------------------------------------------
+//adding action listner using concpet of inner class
+
+import javax.swing.*;
+import java.awt.event.*;
+import java.awt.*;
+
+public class FourWidgetsMain4
+{	JFrame frame;
+	JLabel label;
+	public static void main(String[] args)
+	{	
+		FourWidgetsMain4 fwm4 = new FourWidgetsMain4();
+		fwm4.go();
+
+	}
+
+	public void go()
+	{
+		frame = new JFrame();
+		label = new JLabel("i m going to change :(");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		JButton colorButton = new JButton("click me to see the magic");
+		colorButton.addActionListener(new LabelListener());
+
+		JButton labelButton = new JButton("click me to see the magic");
+		labelButton.addActionListener(new ColorListener());
+
+		label = new JLabel("I m Lable");
+
+		FourWidgets fwm = new FourWidgets();
+
+		frame.getContentPane().add(BorderLayout.SOUTH,colorButton);
+		frame.getContentPane().add(BorderLayout.CENTER,fwm);
+		frame.getContentPane().add(BorderLayout.WEST,label);
+		frame.getContentPane().add(BorderLayout.EAST,labelButton);
+
+		frame.setSize(500,500);
+		frame.setVisible(true);
+
+	}
+
+	class LabelListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent event)
+		{	label.setText("i m changed");
+
+		}
+	}
+
+	class ColorListener implements ActionListener
+	{	public void actionPerformed(ActionEvent event)
+		{
+			frame.repaint();
+		}
+
+	}
+}
+-------------------------------------------------------
+use of inner class:
+it allows us to implement same interface more than once.we can define same method more than once accordnig to our requirement.
+
+to call inner class from outside the outer classs use the code:
+
+class MyOuter {
+	private int x;
+	MyInner inner = new MyInner();
+
+	public void doStuff()
+	{	inner.go();
+	}
+	
+	class MyInner{
+		void go(){
+			x=45;
+		}
+
+	}
+}
+
+
+-------------------------------------------------------
+class Foo{
+	public static void main(String[] args)
+	{	MyOuter outerObj = new MyOuter();
+		MyOuter.MyInner innerObj = new outerObj.new MyInner();
+	}
+}
+
+15) during animations when we repaint the jpanel wali class all the previos things are stored and displayed.
+while if we repaint the frame all the previous views are deleted.
+
+16)there are three layouts possible:
+	BorderLayout : has five regions : NORTH,SOUTH,CENTER,EAST,WEST
+	default layout for jframe
+	only one component in each region at a time.
+	NORTH and SOUTH can have height according to component.
+	East AND west CAN HAve width according to components requirement.
+	rest whole of frame is chosen
+
+	FlowLayout:default for jpanel
+	fills components horizontally in one line only 	word wrap is turned on 
+	goes to next line only after filling the previous one completely.
+
+	BoxLayout:
+	can fill both vertically and horizontally.
+
+17)to replace the default contentPane of JFrame with our own:
+	myFrame.setContentPane(myPanel);
+
+18) to change the JFRame's default borderlayout to other one simply set yor things on jpanel as u want and then replace the JFRames default contentPane wit yor Jpanel.
+
+19)we can also have LayoutManagers turned off:
+setLayout(null);
+
+20)the Center region of borderLayout gets watever is left over;
+to avoid this we can use pack() method which gives center its prefered size and then sets others around then decides the size for the frame.
+
+21)to  change layout use setLayout() method;
+eg:
+jpl.setLayout(new BoxLayout(jpl,BoxLayout.Y_AXIS));
+
+	
+	
+
+
+
+
+
+
+
+
