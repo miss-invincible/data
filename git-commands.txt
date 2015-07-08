@@ -1,0 +1,25 @@
+git commands:
+using git bash
+1)git add <filenames>
+//to add them to commit
+git commit -m "yor message"
+
+2)to intialize new git directory
+git init
+
+3)to add to some remote git repository
+	1)add the remote file name "https:\\github.com\miss-invincible\project-name"
+		git remote add origin
+		or 
+		git add remote xyz
+		xyz can be anything
+		
+4) to push
+	git push origin master
+	git push xyz master
+	
+	
+	when its says converting LF to CRLF it means in unix LF is line feed while in windows its carriage return line feed
+	so nothg to woory about just happens when some unix project is imprted to window
+
+	

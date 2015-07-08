@@ -1,0 +1,31 @@
+1)the problems i faced while starting tomcat:
+ps:i reinstalled jdk and jre to default forlders where they were pointing i.e to C drive
+	1)do not start it from xampp control panel
+	2)go to tomcat directory in xampp and point cmd there
+	3)cd bin
+	4)set JRE_HOME=C:\Program Files\Java\jre1.8.0_45	(without quotes)
+	5)set JAVA_HOME=C:\Program Files\Java\jdk1.8.0_45
+	6)set CATALINA=E:\xampp2\tomcat
+	4)startup
+	
+it showed me errors : 32 bit .dll incompatible with 64 bit platform:  Can't load IA 32-bit .dll on a AMD 64-bit platform
+	for this i downloaded 64 bit .dll file and replaced it with tcnative-1.dll file qhich was 32 bit in xampp/tomcat/bin folder
+	
+then i got error:
+ org.apache.catalina.core.AprLifecycleListener init
+SEVERE: An incompatible version 1.1.12 of the APR based Apache Tomcat Native library is installed, while Tomcat requires version 1.1.17 
+Jan 25, 2011 3:21:05 PM org.apache.catalina.core.AprLifecycleListener init
+
+sthg like this but i searched for it.people said APR just enhances efficiency so even if its not working thats fine
+
+then i got errors in xml file
+some were typing errors while one error was java.io.UnsupportedEncodingException: ISO-8851-1
+
+i searched for it.replaced ISO-8551 with ISO-8559 ans it worked fine!!
+
+..and voilaa!! my site ran successfully!!! hurray 
+
+
+to compile yor program in development directory :
+go to the development library
+javac -classpath /yourpath/tomcat/lib/servlet-api.jar -d classes src/yourJavaFileName.java 		//path where servlet-api.jar lives or u downloaded to
